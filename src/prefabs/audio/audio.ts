@@ -1,3 +1,4 @@
+import { clamp } from '@/utils/math';
 import { BaseObject } from '../base-object';
 
 export type AudioTrackType = 'music' | 'sfx';
@@ -168,5 +169,3 @@ export class Audio extends BaseObject {
   }
 }
 
-/** Clamp a volume value to [0, 1]. */
-const clamp = (v: number): number => Math.min(1, Math.max(0, v));
