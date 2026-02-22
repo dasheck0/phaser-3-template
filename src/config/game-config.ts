@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
-import { BootScene } from '@scenes/boot-scene';
-import { MainMenuScene } from '@scenes/main-menu-scene';
-import { GameScene } from '@scenes/game-scene';
-import { GameOverScene } from '@scenes/game-over-scene';
+import { BootScene } from '@scenes/boot/boot-scene';
+import { MainMenuScene } from '@scenes/main-menu/main-menu-scene';
+import { GameScene } from '@scenes/game/game-scene';
+import { GameOverScene } from '@scenes/game-over/game-over-scene';
+import { OptionsScene } from '@scenes/options/options-scene';
 
 // Game configuration following modular principles
 export const createGameConfig = (): Phaser.Types.Core.GameConfig => ({
@@ -18,7 +19,7 @@ export const createGameConfig = (): Phaser.Types.Core.GameConfig => ({
       debug: false,
     },
   },
-  scene: [BootScene, MainMenuScene, GameScene, GameOverScene],
+  scene: [BootScene, MainMenuScene, GameScene, GameOverScene, OptionsScene],
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
