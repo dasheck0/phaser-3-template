@@ -1,12 +1,6 @@
 {
-  "background": "#2d2d2d",
+  "background": "#0d0d0d",
   "assets": {
-    "audio": [
-      {
-        "key": "test",
-        "path": "/assets/audio/test.mp3"
-      }
-    ],
     "images": [
       {
         "key": "notes",
@@ -32,46 +26,36 @@
       "type": "Label",
       "id": "titleLabel",
       "x": 400,
-      "y": 150,
+      "y": 200,
       "properties": {
-        "text": "Phaser 3 Starter",
-        "fontSize": 48,
-        "color": "#ffffff"
-      }
-    },
-    {
-      "type": "Label",
-      "id": "statsLabel",
-      "x": 400,
-      "y": 220,
-      "properties": {
-        "text": "Sessions played: 0  |  Volume: 1.00",
-        "fontSize": 18,
-        "color": "#aaaaaa"
+        "text": "Game Over",
+        "fontSize": 64,
+        "color": "#ff0000",
+        "fontStyle": "bold"
       }
     },
     {
       "type": "Button",
-      "id": "startButton",
+      "id": "restartButton",
       "x": 400,
-      "y": 310,
+      "y": 350,
       "properties": {
-        "text": "Start Game",
+        "text": "Restart",
         "width": 200,
         "height": 60,
         "fontSize": 24,
-        "backgroundColor": 4886754,
-        "hoverColor": 3504829,
+        "backgroundColor": 4890082,
+        "hoverColor": 3505853,
         "textColor": "#ffffff"
       }
     },
     {
       "type": "Button",
-      "id": "optionsButton",
+      "id": "menuButton",
       "x": 400,
-      "y": 390,
+      "y": 430,
       "properties": {
-        "text": "Options",
+        "text": "Main Menu",
         "width": 200,
         "height": 60,
         "fontSize": 24,

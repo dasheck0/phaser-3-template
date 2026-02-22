@@ -1,0 +1,151 @@
+{
+  "background": "#1a1a2e",
+  "assets": {
+    "images": [
+      {
+        "key": "notes",
+        "path": "/assets/images/notes.png"
+      }
+    ]
+  },
+  "prefabs": [
+    {
+      "type": "Sprite",
+      "id": "logo",
+      "x": 48,
+      "y": 48,
+      "properties": {
+        "textureKey": "notes",
+        "scale": 0.08,
+        "originX": 0.5,
+        "originY": 0.5,
+        "depth": 10
+      }
+    },
+    {
+      "type": "Panel",
+      "id": "bgPanel",
+      "x": 400,
+      "y": 300,
+      "properties": {
+        "width": 500,
+        "height": 400,
+        "color": 1711150,
+        "alpha": 0.95
+      }
+    },
+    {
+      "type": "Panel",
+      "id": "bgStroke",
+      "x": 400,
+      "y": 300,
+      "properties": {
+        "width": 500,
+        "height": 400,
+        "color": 1711150,
+        "alpha": 0,
+        "strokeColor": 4890082,
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "Label",
+      "id": "titleLabel",
+      "x": 400,
+      "y": 130,
+      "properties": {
+        "text": "OPTIONS",
+        "fontSize": 36,
+        "color": "#ffffff",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "type": "Panel",
+      "id": "titleDivider",
+      "x": 400,
+      "y": 175,
+      "properties": {
+        "width": 400,
+        "height": 2,
+        "color": 4890082
+      }
+    },
+    {
+      "type": "Label",
+      "id": "volumeLabel",
+      "x": 180,
+      "y": 260,
+      "properties": {
+        "text": "Master Volume",
+        "fontSize": 20,
+        "color": "#cccccc",
+        "align": "left"
+      }
+    },
+    {
+      "type": "Slider",
+      "id": "masterVolumeSlider",
+      "x": 430,
+      "y": 260,
+      "properties": {
+        "width": 260,
+        "height": 6,
+        "min": 0,
+        "max": 1,
+        "value": 1,
+        "trackColor": 4473924,
+        "handleColor": 4890082,
+        "handleRadius": 12
+      }
+    },
+    {
+      "type": "Panel",
+      "id": "statsDivider",
+      "x": 400,
+      "y": 360,
+      "properties": {
+        "width": 420,
+        "height": 1,
+        "color": 3355443
+      }
+    },
+    {
+      "type": "Label",
+      "id": "statsLabel",
+      "x": 400,
+      "y": 385,
+      "properties": {
+        "text": "Total sessions played: 0",
+        "fontSize": 16,
+        "color": "#777777"
+      }
+    },
+    {
+      "type": "Button",
+      "id": "backButton",
+      "x": 400,
+      "y": 450,
+      "properties": {
+        "text": "Back",
+        "width": 160,
+        "height": 48,
+        "fontSize": 20,
+        "backgroundColor": 4890082,
+        "hoverColor": 3505853,
+        "textColor": "#ffffff"
+      }
+    },
+    {
+      "type": "Label",
+      "id": "keyboardHint",
+      "x": 400,
+      "y": 560,
+      "properties": {
+        "text": "ESC — back to menu",
+        "fontSize": 14,
+        "color": "#555555"
+      }
+    }
+  ]
+}
