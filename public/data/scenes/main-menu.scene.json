@@ -1,0 +1,43 @@
+{
+  "background": "#2d2d2d",
+  "assets": {
+    "audio": [
+      {
+        "key": "test",
+        "path": "/assets/audio/test.mp3"
+      }
+    ]
+  },
+  "prefabs": [
+    {
+      "type": "Button",
+      "id": "startButton",
+      "x": 400,
+      "y": 300,
+      "properties": {
+        "text": "Start Game",
+        "width": 200,
+        "height": 60,
+        "fontSize": 24,
+        "backgroundColor": 4886754,
+        "hoverColor": 3504829,
+        "textColor": "#ffffff"
+      }
+    },
+    {
+      "type": "Button",
+      "id": "optionsButton",
+      "x": 400,
+      "y": 380,
+      "properties": {
+        "text": "Options",
+        "width": 200,
+        "height": 60,
+        "fontSize": 24,
+        "backgroundColor": 6710886,
+        "hoverColor": 5592405,
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}

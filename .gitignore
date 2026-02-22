@@ -154,3 +154,6 @@ vite.config.ts.timestamp-*
 .qraft-cache.lock/
 .qraft-tokens/
 .qraft-github-token/
+
+dasheck0-minimonsterquest
+todo.txt

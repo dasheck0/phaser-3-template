@@ -1,0 +1,88 @@
+{
+  "background": "#87CEEB",
+  "prefabs": [
+    {
+      "type": "Platform",
+      "id": "ground",
+      "x": 400,
+      "y": 568,
+      "properties": {
+        "width": 800,
+        "height": 64,
+        "color": 6710886
+      }
+    },
+    {
+      "type": "Platform",
+      "id": "platform1",
+      "x": 600,
+      "y": 400,
+      "properties": {
+        "width": 200,
+        "height": 32,
+        "color": 6710886
+      }
+    },
+    {
+      "type": "Platform",
+      "id": "platform2",
+      "x": 150,
+      "y": 300,
+      "properties": {
+        "width": 200,
+        "height": 32,
+        "color": 6710886
+      }
+    },
+    {
+      "type": "Platform",
+      "id": "platform3",
+      "x": 750,
+      "y": 220,
+      "properties": {
+        "width": 100,
+        "height": 32,
+        "color": 6710886
+      }
+    },
+    {
+      "type": "Player",
+      "id": "player",
+      "x": 100,
+      "y": 450,
+      "properties": {
+        "width": 32,
+        "height": 48,
+        "color": 65280,
+        "speed": 160,
+        "jumpVelocity": -330
+      }
+    },
+    {
+      "type": "Enemy",
+      "id": "enemy1",
+      "x": 400,
+      "y": 350,
+      "properties": {
+        "width": 32,
+        "height": 32,
+        "color": 16711680,
+        "speed": 50,
+        "patrolDistance": 100
+      }
+    },
+    {
+      "type": "Enemy",
+      "id": "enemy2",
+      "x": 700,
+      "y": 170,
+      "properties": {
+        "width": 32,
+        "height": 32,
+        "color": 16711680,
+        "speed": 30,
+        "patrolDistance": 50
+      }
+    }
+  ]
+}
