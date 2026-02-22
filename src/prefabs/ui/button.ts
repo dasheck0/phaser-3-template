@@ -1,4 +1,4 @@
-import { BaseObject } from './base-object';
+import { BaseObject } from '../base-object';
 
 /**
  * Button Prefab - Interactive UI button
