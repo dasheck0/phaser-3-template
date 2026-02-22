@@ -3,8 +3,6 @@ import { FiniteStateMachine } from '@systems/finite-state-machine';
 import { SceneLoader } from '@systems/scene-loader';
 import { BaseObject } from '@prefabs/base-object';
 
-// Internal cache key used to store the scene config in Phaser's JSON cache
-const SCENE_CONFIG_CACHE_KEY = '__sceneConfig';
 
 /**
  * BaseScene - Base class for all game scenes
@@ -24,10 +22,22 @@ export abstract class BaseScene extends Phaser.Scene {
   private assetsReady = false;
   // Queued create() call, held until assetsReady
   private pendingCreate: (() => void) | null = null;
+  // Guard against onCreateReady() being called twice in one scene lifecycle
+  private creating = false;
 
   constructor(config: string | Phaser.Types.Scenes.SettingsConfig) {
     super(config);
     this.groups = new Map();
+  }
+
+  /**
+   * Phaser init() is the first lifecycle hook where this.events is available.
+   * We register the SHUTDOWN listener here so it fires on every scene stop/restart.
+   * Using off+on prevents duplicate registrations across multiple scene restarts.
+   */
+  init(): void {
+    this.events.off(Phaser.Scenes.Events.SHUTDOWN, this.onSceneShutdown, this);
+    this.events.on(Phaser.Scenes.Events.SHUTDOWN, this.onSceneShutdown, this);
   }
 
   /**
@@ -41,6 +51,11 @@ export abstract class BaseScene extends Phaser.Scene {
    * Subclasses that override preload() MUST call super.preload() first.
    */
   preload(): void {
+    // Reset state for each (re)start of the scene
+    this.assetsReady = false;
+    this.pendingCreate = null;
+    this.creating = false;
+
     this.sceneLoader = new SceneLoader(this);
     const path = this.scenePath;
 
@@ -49,11 +64,15 @@ export abstract class BaseScene extends Phaser.Scene {
       return;
     }
 
+    // Use the scene path as cache key so different scenes never collide
+    const cacheKey = `__sceneConfig:${path}`;
+
     // Pass 1: load the JSON config via Phaser's native loader
-    this.load.json(SCENE_CONFIG_CACHE_KEY, path);
+    this.load.json(cacheKey, path);
 
     this.load.once('complete', () => {
-      const config = this.cache.json.get(SCENE_CONFIG_CACHE_KEY);
+      const config = this.cache.json.get(cacheKey);
+
       if (!config) {
         this.assetsReady = true;
         this.flushPendingCreate();
@@ -87,6 +106,11 @@ export abstract class BaseScene extends Phaser.Scene {
    * Subclasses implement onCreateReady() instead of create().
    */
   create(): void {
+    if (this.creating) {
+      console.warn(`[BaseScene] create() called twice — ignoring (${this.scene.key})`);
+      return;
+    }
+    this.creating = true;
     if (this.assetsReady) {
       this.onCreateReady();
     } else {
@@ -149,10 +173,13 @@ export abstract class BaseScene extends Phaser.Scene {
     });
   }
 
-  shutdown(): void {
+  private onSceneShutdown(): void {
     if (this.sceneLoader) {
       this.sceneLoader.destroy();
     }
     this.groups.clear();
+    const allData = this.data.getAll() as Record<string, unknown>;
+    const prefabKeys = Object.keys(allData).filter((key) => key.startsWith('prefab:'));
+    prefabKeys.forEach((key) => this.data.remove(key));
   }
 }
