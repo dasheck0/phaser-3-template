@@ -1,20 +1,7 @@
-import { BaseScene } from './base-scene';
-import { State, FiniteStateMachine } from '@systems/finite-state-machine';
-
-/**
- * Boot Scene States
- */
-class LoadingState extends State {
-  enter(): void {
-    console.log('Boot: Loading');
-  }
-}
-
-class CompleteState extends State {
-  enter(): void {
-    console.log('Boot: Complete');
-  }
-}
+import { BaseScene } from '../base-scene';
+import { FiniteStateMachine } from '@systems/finite-state-machine';
+import { LoadingState } from './states/loading-state';
+import { CompleteState } from './states/complete-state';
 
 /**
  * Boot Scene - Initial loading scene with FSM
@@ -37,7 +24,6 @@ export class BootScene extends BaseScene {
     this.setupStates();
     this.fsm.setState('loading');
 
-    // Create loading bar
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
 
@@ -58,7 +44,6 @@ export class BootScene extends BaseScene {
     });
     percentText.setOrigin(0.5, 0.5);
 
-    // Update progress bar
     this.load.on('progress', (value: number) => {
       percentText.setText(`${Math.floor(value * 100)}%`);
       progressBar.clear();
@@ -74,7 +59,6 @@ export class BootScene extends BaseScene {
       this.fsm.setState('complete');
     });
 
-    // Load scene configurations (JSON data files)
     this.load.json('mainMenuScene', '/data/scenes/main-menu.scene.json');
     this.load.json('level1Scene', '/data/scenes/level-1.scene.json');
   }
@@ -85,7 +69,6 @@ export class BootScene extends BaseScene {
   }
 
   onCreateReady(): void {
-    // Transition to main menu after short delay
     this.time.delayedCall(500, () => {
       this.scene.start('MainMenuScene');
     });
