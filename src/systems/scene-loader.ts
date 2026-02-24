@@ -306,9 +306,13 @@ export class SceneLoader {
 
 	destroy(): void {
 		this.scene.scale.off(Phaser.Scale.Events.RESIZE, this.onResizeBound, this);
-		this.loadedPrefabs.forEach((prefab) => prefab.destroy());
+		this.loadedPrefabs.forEach((prefab) => {
+			prefab.destroy();
+		});
 		this.loadedPrefabs = [];
-		this.groups.forEach((group) => group.destroy(true));
+		this.groups.forEach((group) => {
+			group.destroy(true);
+		});
 		this.groups.clear();
 		this.cachedConfig = null;
 		this.activeConfig = null;

@@ -42,7 +42,9 @@ export abstract class BaseObject {
 	 * Clean up game objects
 	 */
 	destroy(): void {
-		this.gameObjects.forEach((obj) => obj.destroy());
+		this.gameObjects.forEach((obj) => {
+			obj.destroy();
+		});
 		this.gameObjects = [];
 	}
 

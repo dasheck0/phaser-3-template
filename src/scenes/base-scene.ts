@@ -154,9 +154,9 @@ export abstract class BaseScene extends Phaser.Scene {
 			this.fsm.update(time, delta);
 		}
 		if (this.sceneLoader) {
-			this.sceneLoader
-				.getPrefabs()
-				.forEach((prefab) => prefab.update(time, delta));
+			this.sceneLoader.getPrefabs().forEach((prefab) => {
+				prefab.update(time, delta);
+			});
 		}
 	}
 
@@ -185,6 +185,8 @@ export abstract class BaseScene extends Phaser.Scene {
 		const prefabKeys = Object.keys(allData).filter((key) =>
 			key.startsWith("prefab:"),
 		);
-		prefabKeys.forEach((key) => this.data.remove(key));
+		prefabKeys.forEach((key) => {
+			this.data.remove(key);
+		});
 	}
 }
