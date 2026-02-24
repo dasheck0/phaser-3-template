@@ -157,4 +157,7 @@ vite.config.ts.timestamp-*
 
 dasheck0-minimonsterquest
 todo.txt
+todo.md
 artifacts/scene-snapshots/**/*
+
+.opencode
