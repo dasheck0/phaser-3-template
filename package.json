@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"dev": "vite",
+		"dev": "node ./scripts/dev-with-lan-url.mjs",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"lint": "biome lint",
