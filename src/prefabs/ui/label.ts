@@ -1,62 +1,72 @@
 import { BaseObject } from '../base-object';
 
 export interface LabelOptions {
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
   text?: string;
-  fontSize?: number;
-  color?: string;
-  fontStyle?: string;
-  align?: 'left' | 'center' | 'right';
-  alpha?: number;
+  style?: Phaser.Types.GameObjects.Text.TextStyle;
+  background?: { radius?: number; color?: number; strokeColor?: number; strokeWidth?: number; alpha?: number };
+  space?: { left?: number; right?: number; top?: number; bottom?: number };
+  align?: string;
+  setInteractive?: boolean;
 }
 
 /**
- * Label — static or dynamic text element.
- *
- * options:
- *   x, y        — position
- *   text        — display string (default '')
- *   fontSize    — in px (default 16)
- *   color       — CSS colour string (default '#ffffff')
- *   fontStyle   — e.g. 'bold', 'italic' (default '')
- *   align       — 'left' | 'center' | 'right' (default 'center')
- *   alpha       — 0–1 opacity (default 1)
+ * Label — RexUI label wrapping text with optional rounded-rect background.
+ * Registers as 'Label' in PrefabManager; use { "type": "Label" } in scene JSON.
  */
 export class Label extends BaseObject {
-  private textObject!: Phaser.GameObjects.Text;
+  private widget!: Phaser.GameObjects.GameObject;
 
   create(): void {
-    const x         = this.getOption<number>('x', 0);
-    const y         = this.getOption<number>('y', 0);
-    const text      = this.getOption<string>('text', '');
-    const fontSize  = this.getOption<number>('fontSize', 16);
-    const color     = this.getOption<string>('color', '#ffffff');
-    const fontStyle = this.getOption<string>('fontStyle', '');
-    const align     = this.getOption<'left' | 'center' | 'right'>('align', 'center');
-    const alpha     = this.getOption<number>('alpha', 1);
+    const opts = this.options as LabelOptions;
+    const rexUI = (this.scene as any).rexUI;
+    const x = opts.x ?? 0;
+    const y = opts.y ?? 0;
 
-    const originX = align === 'left' ? 0 : align === 'right' ? 1 : 0.5;
+    const bg = opts.background
+      ? rexUI.add.roundRectangle({
+          radius: opts.background.radius ?? 0,
+          color: opts.background.color ?? 0x000000,
+          strokeColor: opts.background.strokeColor,
+          strokeWidth: opts.background.strokeWidth,
+          alpha: opts.background.alpha,
+        })
+      : undefined;
 
-    this.textObject = this.scene.add.text(x, y, text, {
-      fontSize: `${fontSize}px`,
-      color,
-      fontStyle,
-      align,
-    }).setOrigin(originX, 0.5).setAlpha(alpha);
+    const textObj = this.scene.add.text(0, 0, opts.text ?? '', opts.style ?? {});
 
-    this.addGameObject(this.textObject);
+    const label = rexUI.add.label({
+      x,
+      y,
+      background: bg,
+      text: textObj,
+      space: opts.space ?? {},
+      align: opts.align,
+    }).layout();
+
+    if (opts.setInteractive) {
+      const w = (label as any).width as number;
+      const h = (label as any).height as number;
+      const click = rexUI.add.click(label as Phaser.GameObjects.GameObject);
+      (label as Phaser.GameObjects.GameObject).setInteractive(
+        new Phaser.Geom.Rectangle(0, 0, w, h),
+        Phaser.Geom.Rectangle.Contains,
+      );
+      click.on('click', () => {
+        (label as Phaser.Events.EventEmitter).emit('click', label);
+      });
+    }
+
+    this.widget = label as unknown as Phaser.GameObjects.GameObject;
+    this.addGameObject(this.widget);
   }
 
-  // ---------------------------------------------------------------------------
-  // Public API
-  // ---------------------------------------------------------------------------
-
-  getText(): string {
-    return this.textObject.text;
+  getWidget(): Phaser.GameObjects.GameObject {
+    return this.widget;
   }
 
-  setText(value: string): void {
-    this.textObject.setText(value);
+  setText(text: string): void {
+    (this.widget as any).setText(text);
   }
 }

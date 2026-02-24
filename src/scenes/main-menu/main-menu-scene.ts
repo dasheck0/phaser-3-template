@@ -1,5 +1,3 @@
-import { Audio } from '@prefabs/audio/audio';
-import { Button } from '@prefabs/ui/button';
 import { Label } from '@prefabs/ui/label';
 import { gameStore } from '@systems/store/stores/game-store';
 import { BaseScene } from '../base-scene';
@@ -15,8 +13,6 @@ import { TransitionState } from './states/transition-state';
  *   - Start/stop background music
  */
 export class MainMenuScene extends BaseScene {
-  private audio: Audio | null = null;
-
   constructor() {
     super({ key: 'MainMenuScene' });
   }
@@ -34,19 +30,9 @@ export class MainMenuScene extends BaseScene {
     const { playCount, masterVolume } = gameStore.getState();
     this.updateStatsLabel(playCount, masterVolume);
 
-    const startButton = this.sceneLoader.getPrefabById('startButton');
-    if (startButton instanceof Button) {
-      startButton.setOnClick(() => this.startGame());
-    }
-
-    const optionsButton = this.sceneLoader.getPrefabById('optionsButton');
-    if (optionsButton instanceof Button) {
-      optionsButton.setOnClick(() => this.showOptions());
-    }
-
-    const audioPrefab = this.sceneLoader.getPrefabById('audio');
-    this.audio = audioPrefab instanceof Audio ? audioPrefab : null;
-    this.audio?.playMusic('test');
+    this.wireButton('startButton', () => this.startGame());
+    this.wireButton('optionsButton', () => this.showOptions());
+    this.wireButton('showcaseButton', () => this.showShowcase());
   }
 
   protected setupStates(): void {
@@ -54,15 +40,24 @@ export class MainMenuScene extends BaseScene {
     this.fsm.addState(new TransitionState('transition', this.fsm));
   }
 
-  private updateStatsLabel(playCount: number, masterVolume: number): void {
-    const statsLabel = this.sceneLoader.getPrefabById('statsLabel');
-    if (statsLabel instanceof Label) {
-      statsLabel.setText(`Sessions played: ${playCount}  |  Volume: ${masterVolume.toFixed(2)}`);
+  private wireButton(id: string, callback: () => void): void {
+    const prefab = this.sceneLoader.getPrefabById(id);
+    if (!(prefab instanceof Label)) {
+      throw new Error(`[MainMenuScene] wireButton "${id}": prefab is not a Label`);
     }
+    (prefab.getWidget() as Phaser.GameObjects.GameObject & { on: (event: string, fn: () => void) => void })
+      .on('click', callback);
+  }
+
+  private updateStatsLabel(playCount: number, masterVolume: number): void {
+    const prefab = this.sceneLoader.getPrefabById('statsLabel');
+    if (!(prefab instanceof Label)) {
+      throw new Error('[MainMenuScene] updateStatsLabel: "statsLabel" is not a Label');
+    }
+    prefab.setText(`Sessions played: ${playCount}  |  Volume: ${masterVolume.toFixed(2)}`);
   }
 
   private startGame(): void {
-    this.audio?.stopMusic();
     gameStore.actions.incrementPlayCount();
     this.fsm.setState('transition');
     this.scene.start('GameScene');
@@ -70,5 +65,9 @@ export class MainMenuScene extends BaseScene {
 
   private showOptions(): void {
     this.scene.start('OptionsScene');
+  }
+
+  private showShowcase(): void {
+    this.scene.start('UIShowcaseScene');
   }
 }

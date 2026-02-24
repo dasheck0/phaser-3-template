@@ -1,6 +1,22 @@
-import { SceneConfig, GroupDefinition, AssetDefinitions, AudioAssetDefinition, ImageAssetDefinition, SpritesheetAssetDefinition } from './types';
+import {
+  SceneConfig,
+  GroupDefinition,
+  AssetDefinitions,
+  AudioAssetDefinition,
+  ImageAssetDefinition,
+  SpritesheetAssetDefinition,
+  PrefabDefinition,
+} from './types';
 import { PrefabFactory } from './prefab-factory';
 import { BaseObject } from '@prefabs/base-object';
+import { resolvePrefabDefinitions } from './layout-resolver';
+
+interface LayoutRect {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+}
 
 /**
  * Scene Loader - Loads and applies declarative scene configurations
@@ -12,10 +28,13 @@ export class SceneLoader {
   private loadedPrefabs: BaseObject[] = [];
   private groups: Map<string, Phaser.GameObjects.Group>;
   private cachedConfig: SceneConfig | null = null;
+  private activeConfig: SceneConfig | null = null;
+  private readonly onResizeBound: () => void;
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
     this.groups = new Map();
+    this.onResizeBound = () => this.relayoutPrefabs();
   }
 
   /**
@@ -81,8 +100,20 @@ export class SceneLoader {
       this.createGroups(config.groups);
     }
 
-    this.loadedPrefabs = PrefabFactory.createPrefabs(this.scene, config.prefabs);
+    const gameSize = this.scene.scale.gameSize;
+    const visibleWorldRect = this.getVisibleWorldRect(gameSize.width, gameSize.height);
+    const resolvedPrefabs = resolvePrefabDefinitions(config.prefabs, {
+      sceneLayout: config.layout,
+      worldWidth: gameSize.width,
+      worldHeight: gameSize.height,
+      visibleWorldRect,
+    });
+
+    this.loadedPrefabs = PrefabFactory.createPrefabs(this.scene, resolvedPrefabs);
     this.assignPrefabsToGroups(config.prefabs);
+    this.activeConfig = config;
+    this.scene.scale.off(Phaser.Scale.Events.RESIZE, this.onResizeBound, this);
+    this.scene.scale.on(Phaser.Scale.Events.RESIZE, this.onResizeBound, this);
   }
 
   /**
@@ -139,7 +170,7 @@ export class SceneLoader {
     });
   }
 
-  private assignPrefabsToGroups(prefabDefs: any[]): void {
+  private assignPrefabsToGroups(prefabDefs: PrefabDefinition[]): void {
     prefabDefs.forEach((def, index) => {
       if (def.group && this.groups.has(def.group)) {
         const prefab = this.loadedPrefabs[index];
@@ -153,6 +184,59 @@ export class SceneLoader {
     });
   }
 
+  private getVisibleWorldRect(worldWidth: number, worldHeight: number): LayoutRect {
+    const canvasRect = this.scene.game.canvas.getBoundingClientRect();
+    const parentRect = this.scene.game.canvas.parentElement?.getBoundingClientRect()
+      ?? new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+
+    if (canvasRect.width <= 0 || canvasRect.height <= 0) {
+      return { left: 0, top: 0, right: worldWidth, bottom: worldHeight };
+    }
+
+    const visibleLeftCss = Math.max(parentRect.left, canvasRect.left) - canvasRect.left;
+    const visibleTopCss = Math.max(parentRect.top, canvasRect.top) - canvasRect.top;
+    const visibleRightCss = Math.min(parentRect.right, canvasRect.right) - canvasRect.left;
+    const visibleBottomCss = Math.min(parentRect.bottom, canvasRect.bottom) - canvasRect.top;
+
+    const cssToWorldX = worldWidth / canvasRect.width;
+    const cssToWorldY = worldHeight / canvasRect.height;
+
+    return {
+      left: visibleLeftCss * cssToWorldX,
+      top: visibleTopCss * cssToWorldY,
+      right: visibleRightCss * cssToWorldX,
+      bottom: visibleBottomCss * cssToWorldY,
+    };
+  }
+
+  private relayoutPrefabs(): void {
+    if (!this.activeConfig || this.loadedPrefabs.length === 0) {
+      return;
+    }
+
+    const gameSize = this.scene.scale.gameSize;
+    const visibleWorldRect = this.getVisibleWorldRect(gameSize.width, gameSize.height);
+    const resolvedPrefabs = resolvePrefabDefinitions(this.activeConfig.prefabs, {
+      sceneLayout: this.activeConfig.layout,
+      worldWidth: gameSize.width,
+      worldHeight: gameSize.height,
+      visibleWorldRect,
+    });
+
+    resolvedPrefabs.forEach((resolved, index) => {
+      const prefab = this.loadedPrefabs[index];
+      if (!prefab) {
+        return;
+      }
+
+      prefab.getGameObjects().forEach((obj) => {
+        if ('setPosition' in obj && typeof obj.setPosition === 'function') {
+          (obj as { setPosition: (x: number, y: number) => unknown }).setPosition(resolved.x, resolved.y);
+        }
+      });
+    });
+  }
+
   // ---------------------------------------------------------------------------
   // Private — background
   // ---------------------------------------------------------------------------
@@ -162,7 +246,7 @@ export class SceneLoader {
       const color = parseInt(background.substring(1), 16);
       this.scene.cameras.main.setBackgroundColor(color);
     } else {
-      console.warn(`SceneLoader: background "${background}" not supported, use hex format`);
+      throw new Error(`SceneLoader: background "${background}" not supported, use hex format`);
     }
   }
 
@@ -170,8 +254,12 @@ export class SceneLoader {
   // Public accessors
   // ---------------------------------------------------------------------------
 
-  getPrefabById(id: string): BaseObject | null {
-    return this.scene.data.get(`prefab:${id}`) || null;
+  getPrefabById(id: string): BaseObject {
+    const result = this.scene.data.get(`prefab:${id}`) as BaseObject | undefined;
+    if (!result) {
+      throw new Error(`[SceneLoader] getPrefabById("${id}"): prefab not found`);
+    }
+    return result;
   }
 
   getPrefabs(): BaseObject[] {
@@ -187,10 +275,12 @@ export class SceneLoader {
   }
 
   destroy(): void {
+    this.scene.scale.off(Phaser.Scale.Events.RESIZE, this.onResizeBound, this);
     this.loadedPrefabs.forEach((prefab) => prefab.destroy());
     this.loadedPrefabs = [];
     this.groups.forEach((group) => group.destroy(true));
     this.groups.clear();
     this.cachedConfig = null;
+    this.activeConfig = null;
   }
 }

@@ -1,5 +1,5 @@
 import PrefabManager from './prefab-manager';
-import { PrefabDefinition } from './types';
+import { ResolvedPrefabDefinition } from './types';
 import { BaseObject } from '@prefabs/base-object';
 
 /**
@@ -15,7 +15,7 @@ export class PrefabFactory {
    * @returns Prefab instance
    * @throws Error if prefab type not found
    */
-  static createPrefab(scene: Phaser.Scene, definition: PrefabDefinition): BaseObject {
+  static createPrefab(scene: Phaser.Scene, definition: ResolvedPrefabDefinition): BaseObject {
     if (!PrefabManager.has(definition.type)) {
       throw new Error(
         `Prefab type "${definition.type}" not found in registry. ` +
@@ -47,7 +47,7 @@ export class PrefabFactory {
    * Functional: Maps over definitions, returns array of instances
    * @throws Error if any prefab type not found
    */
-  static createPrefabs(scene: Phaser.Scene, definitions: PrefabDefinition[]): BaseObject[] {
+  static createPrefabs(scene: Phaser.Scene, definitions: ResolvedPrefabDefinition[]): BaseObject[] {
     return definitions.map((def) => this.createPrefab(scene, def));
   }
 }

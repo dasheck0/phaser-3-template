@@ -26,8 +26,7 @@
     {
       "type": "Platform",
       "id": "ground",
-      "x": 400,
-      "y": 568,
+      "layout": { "space": "full", "x": 400, "y": 568 },
       "group": "platforms",
       "properties": {
         "width": 800,
@@ -38,8 +37,7 @@
     {
       "type": "Platform",
       "id": "platform1",
-      "x": 600,
-      "y": 400,
+      "layout": { "space": "full", "x": 600, "y": 400 },
       "group": "platforms",
       "properties": {
         "width": 200,
@@ -50,8 +48,7 @@
     {
       "type": "Platform",
       "id": "platform2",
-      "x": 150,
-      "y": 300,
+      "layout": { "space": "full", "x": 150, "y": 300 },
       "group": "platforms",
       "properties": {
         "width": 200,
@@ -62,8 +59,7 @@
     {
       "type": "Platform",
       "id": "platform3",
-      "x": 750,
-      "y": 220,
+      "layout": { "space": "full", "x": 750, "y": 220 },
       "group": "platforms",
       "properties": {
         "width": 100,
@@ -74,8 +70,7 @@
     {
       "type": "Player",
       "id": "player",
-      "x": 100,
-      "y": 450,
+      "layout": { "space": "full", "x": 100, "y": 450 },
       "group": "player",
       "properties": {
         "textureKey": "notes",
@@ -87,8 +82,7 @@
     {
       "type": "Enemy",
       "id": "enemy1",
-      "x": 400,
-      "y": 350,
+      "layout": { "space": "full", "x": 400, "y": 350 },
       "group": "enemies",
       "properties": {
         "textureKey": "notes",
@@ -101,8 +95,7 @@
     {
       "type": "Enemy",
       "id": "enemy2",
-      "x": 700,
-      "y": 170,
+      "layout": { "space": "full", "x": 700, "y": 170 },
       "group": "enemies",
       "properties": {
         "textureKey": "notes",

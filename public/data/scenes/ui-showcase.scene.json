@@ -1,0 +1,278 @@
+{
+  "background": "#1a1a2e",
+  "layout": {
+    "safeMargin": {
+      "top": 16,
+      "right": 16,
+      "bottom": 16,
+      "left": 16
+    }
+  },
+  "prefabs": [
+    {
+      "type": "Label",
+      "id": "backButton",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+16", "top": "top+16" }
+      },
+      "properties": {
+        "text": "\u2190 Back",
+        "style": { "fontSize": "15px", "color": "#dddddd" },
+        "background": { "radius": 6, "color": 5066061, "strokeColor": 4342339, "strokeWidth": 1 },
+        "space": { "left": 14, "right": 14, "top": 8, "bottom": 8 },
+        "setInteractive": true
+      }
+    },
+    {
+      "type": "Label",
+      "id": "showcaseTitle",
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+24" }
+      },
+      "properties": {
+        "text": "UI Showcase",
+        "style": { "fontSize": "24px", "color": "#ffffff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sectionLabelHeader",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+80" }
+      },
+      "properties": {
+        "text": "LABELS",
+        "style": { "fontSize": "13px", "color": "#aaaaff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoLabelPlain",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+104" }
+      },
+      "properties": {
+        "text": "Plain text label",
+        "style": { "fontSize": "16px", "color": "#cccccc" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoLabelBg",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+136" }
+      },
+      "properties": {
+        "text": "Label with background",
+        "style": { "fontSize": "16px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 3842154 },
+        "space": { "left": 14, "right": 14, "top": 8, "bottom": 8 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoLabelStroke",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+184" }
+      },
+      "properties": {
+        "text": "Label with stroke",
+        "style": { "fontSize": "16px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 2236996, "strokeColor": 8947967, "strokeWidth": 2 },
+        "space": { "left": 14, "right": 14, "top": 8, "bottom": 8 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sectionButtonHeader",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+248" }
+      },
+      "properties": {
+        "text": "BUTTONS",
+        "style": { "fontSize": "13px", "color": "#aaaaff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoButton1",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+272" }
+      },
+      "properties": {
+        "text": "Primary Button",
+        "style": { "fontSize": "16px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 4886754, "strokeColor": 3504829, "strokeWidth": 2 },
+        "space": { "left": 32, "right": 32, "top": 12, "bottom": 12 },
+        "setInteractive": true
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoButton2",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+200", "top": "top+272" }
+      },
+      "properties": {
+        "text": "Secondary Button",
+        "style": { "fontSize": "16px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 6710886, "strokeColor": 5592405, "strokeWidth": 2 },
+        "space": { "left": 32, "right": 32, "top": 12, "bottom": 12 },
+        "setInteractive": true
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoButton3",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+420", "top": "top+272" }
+      },
+      "properties": {
+        "text": "Danger Button",
+        "style": { "fontSize": "16px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 10027008, "strokeColor": 8323072, "strokeWidth": 2 },
+        "space": { "left": 32, "right": 32, "top": 12, "bottom": 12 },
+        "setInteractive": true
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sectionSliderHeader",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+352" }
+      },
+      "properties": {
+        "text": "SLIDERS",
+        "style": { "fontSize": "13px", "color": "#aaaaff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sliderLabel1",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+376" }
+      },
+      "properties": {
+        "text": "Volume",
+        "style": { "fontSize": "14px", "color": "#cccccc" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Slider",
+      "id": "demoSlider1",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+100", "top": "top+376" }
+      },
+      "properties": {
+        "width": 300,
+        "height": 20,
+        "orientation": "x",
+        "value": 0.7,
+        "track": { "height": 8, "radius": 4, "color": 4473924 },
+        "thumb": { "width": 20, "height": 20, "radius": 10, "color": 9109759 },
+        "input": "drag"
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sliderLabel2",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+416" }
+      },
+      "properties": {
+        "text": "Brightness",
+        "style": { "fontSize": "14px", "color": "#cccccc" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Slider",
+      "id": "demoSlider2",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+100", "top": "top+416" }
+      },
+      "properties": {
+        "width": 300,
+        "height": 20,
+        "orientation": "x",
+        "value": 0.4,
+        "track": { "height": 8, "radius": 4, "color": 4473924 },
+        "thumb": { "width": 20, "height": 20, "radius": 10, "color": 16773120 },
+        "input": "drag"
+      }
+    },
+    {
+      "type": "Label",
+      "id": "sectionInfoHeader",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+480" }
+      },
+      "properties": {
+        "text": "STYLED TEXT",
+        "style": { "fontSize": "13px", "color": "#aaaaff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoSmall",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+504" }
+      },
+      "properties": {
+        "text": "Small - 12px",
+        "style": { "fontSize": "12px", "color": "#999999" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoMedium",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+524" }
+      },
+      "properties": {
+        "text": "Medium - 18px",
+        "style": { "fontSize": "18px", "color": "#cccccc" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    },
+    {
+      "type": "Label",
+      "id": "demoLarge",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+20", "top": "top+550" }
+      },
+      "properties": {
+        "text": "Large - 28px bold",
+        "style": { "fontSize": "28px", "color": "#ffffff", "fontStyle": "bold" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+      }
+    }
+  ]
+}

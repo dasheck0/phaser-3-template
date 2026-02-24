@@ -4,7 +4,50 @@ export interface PrefabProperties {
   [key: string]: unknown;
 }
 
+export interface SceneSafeMargin {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
+}
+
+export interface SceneLayoutConfig {
+  safeMargin?: SceneSafeMargin;
+}
+
+export interface LayoutAnchor {
+  left?: string | number;
+  right?: string | number;
+  centerX?: string | number;
+  x?: string | number;
+  top?: string | number;
+  bottom?: string | number;
+  centerY?: string | number;
+  y?: string | number;
+}
+
+export interface LayoutOffset {
+  x?: number;
+  y?: number;
+}
+
+export interface PrefabLayout {
+  space?: 'safe' | 'full';
+  x?: number;
+  y?: number;
+  anchor?: LayoutAnchor;
+  offset?: LayoutOffset;
+}
+
 export interface PrefabDefinition {
+  type: string;
+  id?: string;
+  layout: PrefabLayout;
+  properties?: PrefabProperties;
+  group?: string;
+}
+
+export interface ResolvedPrefabDefinition {
   type: string;
   id?: string;
   x: number;
@@ -53,8 +96,8 @@ export interface AssetDefinitions {
 
 export interface SceneConfig {
   background?: string;
+  layout?: SceneLayoutConfig;
   assets?: AssetDefinitions;
   groups?: GroupDefinition[];
   prefabs: PrefabDefinition[];
 }
-

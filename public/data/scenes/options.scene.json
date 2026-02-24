@@ -1,150 +1,98 @@
 {
   "background": "#1a1a2e",
-  "assets": {
-    "images": [
-      {
-        "key": "notes",
-        "path": "/assets/images/notes.png"
-      }
-    ]
+  "layout": {
+    "safeMargin": {
+      "top": 16,
+      "right": 16,
+      "bottom": 16,
+      "left": 16
+    }
   },
   "prefabs": [
     {
-      "type": "Sprite",
-      "id": "logo",
-      "x": 48,
-      "y": 48,
-      "properties": {
-        "textureKey": "notes",
-        "scale": 0.08,
-        "originX": 0.5,
-        "originY": 0.5,
-        "depth": 10
-      }
-    },
-    {
-      "type": "Panel",
-      "id": "bgPanel",
-      "x": 400,
-      "y": 300,
-      "properties": {
-        "width": 500,
-        "height": 400,
-        "color": 1711150,
-        "alpha": 0.95
-      }
-    },
-    {
-      "type": "Panel",
-      "id": "bgStroke",
-      "x": 400,
-      "y": 300,
-      "properties": {
-        "width": 500,
-        "height": 400,
-        "color": 1711150,
-        "alpha": 0,
-        "strokeColor": 4890082,
-        "strokeWidth": 2
-      }
-    },
-    {
       "type": "Label",
       "id": "titleLabel",
-      "x": 400,
-      "y": 130,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+130" }
+      },
       "properties": {
         "text": "OPTIONS",
-        "fontSize": 36,
-        "color": "#ffffff",
-        "fontStyle": "bold"
-      }
-    },
-    {
-      "type": "Panel",
-      "id": "titleDivider",
-      "x": 400,
-      "y": 175,
-      "properties": {
-        "width": 400,
-        "height": 2,
-        "color": 4890082
+        "style": { "fontSize": "36px", "color": "#ffffff", "fontStyle": "bold" },
+        "space": { "left": 10, "right": 10, "top": 8, "bottom": 8 },
+        "align": "center"
       }
     },
     {
       "type": "Label",
       "id": "volumeLabel",
-      "x": 180,
-      "y": 260,
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+60", "top": "top+255" }
+      },
       "properties": {
         "text": "Master Volume",
-        "fontSize": 20,
-        "color": "#cccccc",
-        "align": "left"
+        "style": { "fontSize": "20px", "color": "#cccccc" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
       }
     },
     {
       "type": "Slider",
       "id": "masterVolumeSlider",
-      "x": 430,
-      "y": 260,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center+60", "top": "top+255" }
+      },
       "properties": {
         "width": 260,
-        "height": 6,
-        "min": 0,
-        "max": 1,
+        "height": 20,
+        "orientation": "x",
         "value": 1,
-        "trackColor": 4473924,
-        "handleColor": 4890082,
-        "handleRadius": 12
-      }
-    },
-    {
-      "type": "Panel",
-      "id": "statsDivider",
-      "x": 400,
-      "y": 360,
-      "properties": {
-        "width": 420,
-        "height": 1,
-        "color": 3355443
+        "track": { "width": 260, "height": 6, "radius": 3, "color": 4473924 },
+        "thumb": { "width": 24, "height": 24, "radius": 12, "color": 4890082 },
+        "input": "drag"
       }
     },
     {
       "type": "Label",
       "id": "statsLabel",
-      "x": 400,
-      "y": 385,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+380" }
+      },
       "properties": {
         "text": "Total sessions played: 0",
-        "fontSize": 16,
-        "color": "#777777"
+        "style": { "fontSize": "16px", "color": "#777777" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
       }
     },
     {
-      "type": "Button",
+      "type": "Label",
       "id": "backButton",
-      "x": 400,
-      "y": 450,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+445" }
+      },
       "properties": {
         "text": "Back",
-        "width": 160,
-        "height": 48,
-        "fontSize": 20,
-        "backgroundColor": 4890082,
-        "hoverColor": 3505853,
-        "textColor": "#ffffff"
+        "style": { "fontSize": "20px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 4890082, "strokeColor": 3505853, "strokeWidth": 2 },
+        "space": { "left": 32, "right": 32, "top": 12, "bottom": 12 },
+        "align": "center",
+        "setInteractive": true
       }
     },
     {
       "type": "Label",
       "id": "keyboardHint",
-      "x": 400,
-      "y": 560,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+555" }
+      },
       "properties": {
-        "text": "ESC — back to menu",
-        "fontSize": 14,
-        "color": "#555555"
+        "text": "ESC - back to menu",
+        "style": { "fontSize": "14px", "color": "#555555" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
       }
     }
   ]

@@ -1,4 +1,4 @@
-import { Button } from '@prefabs/ui/button';
+import { Label } from '@prefabs/ui/label';
 import { BaseScene } from '../base-scene';
 import { DisplayState } from './states/display-state';
 
@@ -24,18 +24,21 @@ export class GameOverScene extends BaseScene {
 
     this.fsm.setState('display');
 
-    const restartButton = this.sceneLoader.getPrefabById('restartButton');
-    if (restartButton instanceof Button) {
-      restartButton.setOnClick(() => this.scene.start('GameScene'));
-    }
-
-    const menuButton = this.sceneLoader.getPrefabById('menuButton');
-    if (menuButton instanceof Button) {
-      menuButton.setOnClick(() => this.scene.start('MainMenuScene'));
-    }
+    this.wireButton('restartButton', () => this.scene.start('GameScene'));
+    this.wireButton('menuButton', () => this.scene.start('MainMenuScene'));
   }
 
   protected setupStates(): void {
     this.fsm.addState(new DisplayState('display', this.fsm));
   }
+
+  private wireButton(id: string, callback: () => void): void {
+    const prefab = this.sceneLoader.getPrefabById(id);
+    if (!(prefab instanceof Label)) {
+      throw new Error(`[GameOverScene] wireButton "${id}": prefab is not a Label`);
+    }
+    (prefab.getWidget() as Phaser.GameObjects.GameObject & { on: (event: string, fn: () => void) => void })
+      .on('click', callback);
+  }
 }
+

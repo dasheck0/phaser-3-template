@@ -62,11 +62,26 @@ export class GameScene extends BaseScene {
     const config: SceneConfig = {
       background: '#87CEEB',
       prefabs: [
-        { type: 'Platform', id: 'ground', x: 400, y: 568, properties: { width: 800, height: 64 } },
-        { type: 'Platform', x: 600, y: 400, properties: { width: 200, height: 32 } },
-        { type: 'Platform', x: 150, y: 300, properties: { width: 200, height: 32 } },
-        { type: 'Player', id: 'player', x: 100, y: 450, properties: { speed: 160, jumpVelocity: -330 } },
-        { type: 'Enemy', id: 'enemy1', x: 400, y: 350, properties: { speed: 50, patrolDistance: 100 } },
+        {
+          type: 'Platform',
+          id: 'ground',
+          layout: { space: 'full', x: 400, y: 568 },
+          properties: { width: 800, height: 64 },
+        },
+        { type: 'Platform', layout: { space: 'full', x: 600, y: 400 }, properties: { width: 200, height: 32 } },
+        { type: 'Platform', layout: { space: 'full', x: 150, y: 300 }, properties: { width: 200, height: 32 } },
+        {
+          type: 'Player',
+          id: 'player',
+          layout: { space: 'full', x: 100, y: 450 },
+          properties: { speed: 160, jumpVelocity: -330 },
+        },
+        {
+          type: 'Enemy',
+          id: 'enemy1',
+          layout: { space: 'full', x: 400, y: 350 },
+          properties: { speed: 50, patrolDistance: 100 },
+        },
       ],
     };
 

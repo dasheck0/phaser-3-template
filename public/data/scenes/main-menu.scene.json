@@ -1,83 +1,117 @@
 {
   "background": "#2d2d2d",
+  "layout": {
+    "safeMargin": {
+      "top": 16,
+      "right": 16,
+      "bottom": 16,
+      "left": 16
+    }
+  },
   "assets": {
+    "images": [
+      {
+        "key": "notesLogo",
+        "path": "/assets/images/notes.png"
+      }
+    ],
     "audio": [
       {
         "key": "test",
         "path": "/assets/audio/test.mp3"
       }
-    ],
-    "images": [
-      {
-        "key": "notes",
-        "path": "/assets/images/notes.png"
-      }
     ]
   },
   "prefabs": [
     {
-      "type": "Sprite",
-      "id": "logo",
-      "x": 48,
-      "y": 48,
+      "type": "StaticImage",
+      "id": "menuLogo",
+      "layout": {
+        "space": "safe",
+        "anchor": { "left": "left+16", "top": "top+16" }
+      },
       "properties": {
-        "textureKey": "notes",
-        "scale": 0.08,
-        "originX": 0.5,
-        "originY": 0.5,
-        "depth": 10
+        "textureKey": "notesLogo",
+        "width": 128,
+        "height": 128,
+        "originX": 0,
+        "originY": 0
       }
     },
     {
       "type": "Label",
       "id": "titleLabel",
-      "x": 400,
-      "y": 150,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+50" }
+      },
       "properties": {
         "text": "Phaser 3 Starter",
-        "fontSize": 48,
-        "color": "#ffffff"
+        "style": { "fontSize": "48px", "color": "#00ffff" },
+        "background": { "radius": 4, "color": 0 },
+        "space": { "left": 10, "right": 10, "top": 8, "bottom": 8 },
+        "align": "center"
       }
     },
     {
       "type": "Label",
       "id": "statsLabel",
-      "x": 400,
-      "y": 220,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+210" }
+      },
       "properties": {
         "text": "Sessions played: 0  |  Volume: 1.00",
-        "fontSize": 18,
-        "color": "#aaaaaa"
+        "style": { "fontSize": "18px", "color": "#aaaaaa" },
+        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
       }
     },
     {
-      "type": "Button",
+      "type": "Label",
       "id": "startButton",
-      "x": 400,
-      "y": 310,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+300" }
+      },
       "properties": {
         "text": "Start Game",
-        "width": 200,
-        "height": 60,
-        "fontSize": 24,
-        "backgroundColor": 4886754,
-        "hoverColor": 3504829,
-        "textColor": "#ffffff"
+        "style": { "fontSize": "24px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 4886754, "strokeColor": 3504829, "strokeWidth": 2 },
+        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+        "align": "center",
+        "setInteractive": true
       }
     },
     {
-      "type": "Button",
+      "type": "Label",
       "id": "optionsButton",
-      "x": 400,
-      "y": 390,
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+375" }
+      },
       "properties": {
         "text": "Options",
-        "width": 200,
-        "height": 60,
-        "fontSize": 24,
-        "backgroundColor": 6710886,
-        "hoverColor": 5592405,
-        "textColor": "#ffffff"
+        "style": { "fontSize": "24px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 6710886, "strokeColor": 5592405, "strokeWidth": 2 },
+        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+        "align": "center",
+        "setInteractive": true
+      }
+    },
+    {
+      "type": "Label",
+      "id": "showcaseButton",
+      "layout": {
+        "space": "safe",
+        "anchor": { "centerX": "center", "top": "top+450" }
+      },
+      "properties": {
+        "text": "UI Showcase",
+        "style": { "fontSize": "24px", "color": "#ffffff" },
+        "background": { "radius": 6, "color": 3342336, "strokeColor": 2228224, "strokeWidth": 2 },
+        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+        "align": "center",
+        "setInteractive": true
       }
     }
   ]

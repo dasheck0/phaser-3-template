@@ -1,4 +1,3 @@
-import { Button } from '@prefabs/ui/button';
 import { Label } from '@prefabs/ui/label';
 import { Slider } from '@prefabs/ui/slider';
 import { gameStore } from '@systems/store/stores/game-store';
@@ -31,27 +30,15 @@ export class OptionsScene extends BaseScene {
     this.fsm.setState('idle');
 
     const { masterVolume, playCount } = gameStore.getState();
-
     this.updateStatsLabel(playCount);
-
-    const slider = this.sceneLoader.getPrefabById('masterVolumeSlider');
-    if (slider instanceof Slider) {
-      slider.setValue(masterVolume);
-      slider.setOnChange((value) => gameStore.actions.setMasterVolume(value));
-    }
-
-    const backButton = this.sceneLoader.getPrefabById('backButton');
-    if (backButton instanceof Button) {
-      backButton.setOnClick(() => this.goBack());
-    }
+    this.wireSlider(masterVolume);
+    this.wireButton('backButton', () => this.goBack());
 
     this.unsubscribe = gameStore.subscribe((state) => {
-      if (slider instanceof Slider) slider.setValue(state.masterVolume);
       this.updateStatsLabel(state.playCount);
     });
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribe?.());
-
     this.input.keyboard?.removeAllListeners('keydown-ESC');
     this.input.keyboard?.once('keydown-ESC', () => this.goBack());
   }
@@ -60,11 +47,31 @@ export class OptionsScene extends BaseScene {
     this.fsm.addState(new IdleState('idle', this.fsm));
   }
 
-  private updateStatsLabel(playCount: number): void {
-    const statsLabel = this.sceneLoader.getPrefabById('statsLabel');
-    if (statsLabel instanceof Label) {
-      statsLabel.setText(`Total sessions played: ${playCount}`);
+  private wireSlider(initialValue: number): void {
+    const prefab = this.sceneLoader.getPrefabById('masterVolumeSlider');
+    if (!(prefab instanceof Slider)) {
+      throw new Error('[OptionsScene] wireSlider: "masterVolumeSlider" is not a Slider');
     }
+    prefab.setValue(initialValue);
+    (prefab.getWidget() as Phaser.GameObjects.GameObject & { on: (event: string, fn: (value: number) => void) => void })
+      .on('valuechange', (value: number) => gameStore.actions.setMasterVolume(value));
+  }
+
+  private wireButton(id: string, callback: () => void): void {
+    const prefab = this.sceneLoader.getPrefabById(id);
+    if (!(prefab instanceof Label)) {
+      throw new Error(`[OptionsScene] wireButton "${id}": prefab is not a Label`);
+    }
+    (prefab.getWidget() as Phaser.GameObjects.GameObject & { on: (event: string, fn: () => void) => void })
+      .on('click', callback);
+  }
+
+  private updateStatsLabel(playCount: number): void {
+    const prefab = this.sceneLoader.getPrefabById('statsLabel');
+    if (!(prefab instanceof Label)) {
+      throw new Error('[OptionsScene] updateStatsLabel: "statsLabel" is not a Label');
+    }
+    prefab.setText(`Total sessions played: ${playCount}`);
   }
 
   private goBack(): void {
