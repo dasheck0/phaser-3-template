@@ -1,59 +1,73 @@
 {
-  "background": "#0d0d0d",
-  "layout": {
-    "safeMargin": {
-      "top": 16,
-      "right": 16,
-      "bottom": 16,
-      "left": 16
-    }
-  },
-  "prefabs": [
-    {
-      "type": "Label",
-      "id": "titleLabel",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+180" }
-      },
-      "properties": {
-        "text": "Game Over",
-        "style": { "fontSize": "64px", "color": "#ff0000", "fontStyle": "bold" },
-        "space": { "left": 10, "right": 10, "top": 10, "bottom": 10 },
-        "align": "center"
-      }
-    },
-    {
-      "type": "Label",
-      "id": "restartButton",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+340" }
-      },
-      "properties": {
-        "text": "Restart",
-        "style": { "fontSize": "24px", "color": "#ffffff" },
-        "background": { "radius": 6, "color": 4890082, "strokeColor": 3505853, "strokeWidth": 2 },
-        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
-        "align": "center",
-        "setInteractive": true
-      }
-    },
-    {
-      "type": "Label",
-      "id": "menuButton",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+420" }
-      },
-      "properties": {
-        "text": "Main Menu",
-        "style": { "fontSize": "24px", "color": "#ffffff" },
-        "background": { "radius": 6, "color": 6710886, "strokeColor": 5592405, "strokeWidth": 2 },
-        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
-        "align": "center",
-        "setInteractive": true
-      }
-    }
-  ]
+	"background": "#0d0d0d",
+	"layout": {
+		"safeMargin": {
+			"top": 16,
+			"right": 16,
+			"bottom": 16,
+			"left": 16
+		}
+	},
+	"prefabs": [
+		{
+			"type": "Label",
+			"id": "titleLabel",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+180" }
+			},
+			"properties": {
+				"text": "Game Over",
+				"style": {
+					"fontSize": "64px",
+					"color": "#ff0000",
+					"fontStyle": "bold"
+				},
+				"space": { "left": 10, "right": 10, "top": 10, "bottom": 10 },
+				"align": "center"
+			}
+		},
+		{
+			"type": "Label",
+			"id": "restartButton",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+340" }
+			},
+			"properties": {
+				"text": "Restart",
+				"style": { "fontSize": "24px", "color": "#ffffff" },
+				"background": {
+					"radius": 6,
+					"color": 4890082,
+					"strokeColor": 3505853,
+					"strokeWidth": 2
+				},
+				"space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+				"align": "center",
+				"setInteractive": true
+			}
+		},
+		{
+			"type": "Label",
+			"id": "menuButton",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+420" }
+			},
+			"properties": {
+				"text": "Main Menu",
+				"style": { "fontSize": "24px", "color": "#ffffff" },
+				"background": {
+					"radius": 6,
+					"color": 6710886,
+					"strokeColor": 5592405,
+					"strokeWidth": 2
+				},
+				"space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+				"align": "center",
+				"setInteractive": true
+			}
+		}
+	]
 }

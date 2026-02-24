@@ -1,5 +1,10 @@
-import { createStore as createZustandStore } from 'zustand/vanilla';
-import { MutationMap, StoreDefinition, StoreInstance, Actions } from './types';
+import { createStore as createZustandStore } from "zustand/vanilla";
+import type {
+	Actions,
+	MutationMap,
+	StoreDefinition,
+	StoreInstance,
+} from "./types";
 
 /**
  * createStore — the single entry point for defining a new store.
@@ -20,54 +25,57 @@ import { MutationMap, StoreDefinition, StoreInstance, Actions } from './types';
  * });
  * ```
  */
-export const createStore = <TState extends object, TMutations extends MutationMap<TState>>(
-  definition: StoreDefinition<TState, TMutations>,
+export const createStore = <
+	TState extends object,
+	TMutations extends MutationMap<TState>,
+>(
+	definition: StoreDefinition<TState, TMutations>,
 ): StoreInstance<TState, TMutations> => {
-  const { key, adapter, state: initialState, mutations } = definition;
+	const { key, adapter, state: initialState, mutations } = definition;
 
-  // Internal Zustand vanilla store — holds the single source of truth
-  const zustandStore = createZustandStore<TState>(() => ({ ...initialState }));
+	// Internal Zustand vanilla store — holds the single source of truth
+	const zustandStore = createZustandStore<TState>(() => ({ ...initialState }));
 
-  // Auto-persist on every state change
-  zustandStore.subscribe((state) => {
-    adapter.save(key, state);
-  });
+	// Auto-persist on every state change
+	zustandStore.subscribe((state) => {
+		adapter.save(key, state);
+	});
 
-  // Build typed action dispatchers from the mutations map
-  const actions = Object.fromEntries(
-    Object.entries(mutations).map(([name, mutation]) => [
-      name,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (payload?: any) => {
-        const current = zustandStore.getState();
-        const next = mutation(current, payload);
-        zustandStore.setState(next);
-      },
-    ]),
-  ) as Actions<TState, TMutations>;
+	// Build typed action dispatchers from the mutations map
+	const actions = Object.fromEntries(
+		Object.entries(mutations).map(([name, mutation]) => [
+			name,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			(payload?: any) => {
+				const current = zustandStore.getState();
+				const next = mutation(current, payload);
+				zustandStore.setState(next);
+			},
+		]),
+	) as Actions<TState, TMutations>;
 
-  // Hydrate: merge persisted state on top of initial state
-  const hydrate = async (): Promise<void> => {
-    const persisted = await adapter.load<TState>(key);
-    if (persisted) {
-      zustandStore.setState({ ...initialState, ...persisted });
-    }
-  };
+	// Hydrate: merge persisted state on top of initial state
+	const hydrate = async (): Promise<void> => {
+		const persisted = await adapter.load<TState>(key);
+		if (persisted) {
+			zustandStore.setState({ ...initialState, ...persisted });
+		}
+	};
 
-  // Reset: restore initial state and wipe the persisted snapshot
-  const reset = async (): Promise<void> => {
-    zustandStore.setState({ ...initialState });
-    await adapter.clear(key);
-  };
+	// Reset: restore initial state and wipe the persisted snapshot
+	const reset = async (): Promise<void> => {
+		zustandStore.setState({ ...initialState });
+		await adapter.clear(key);
+	};
 
-  // Kick off initial hydration immediately (fire-and-forget)
-  hydrate();
+	// Kick off initial hydration immediately (fire-and-forget)
+	hydrate();
 
-  return {
-    getState: () => zustandStore.getState(),
-    actions,
-    subscribe: (listener) => zustandStore.subscribe(listener),
-    reset,
-    hydrate,
-  };
+	return {
+		getState: () => zustandStore.getState(),
+		actions,
+		subscribe: (listener) => zustandStore.subscribe(listener),
+		reset,
+		hydrate,
+	};
 };

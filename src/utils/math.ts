@@ -12,7 +12,7 @@
  * clamp(-5, 0, 10)  // → 0
  */
 export const clamp = (value: number, min = 0, max = 1): number =>
-  Math.min(max, Math.max(min, value));
+	Math.min(max, Math.max(min, value));
 
 /**
  * lerp — linear interpolation between two values.
@@ -22,10 +22,10 @@ export const clamp = (value: number, min = 0, max = 1): number =>
  * @param t - Interpolation factor [0..1]
  */
 export const lerp = (a: number, b: number, t: number): number =>
-  a + (b - a) * clamp(t);
+	a + (b - a) * clamp(t);
 
 /**
  * normalize — map a value from [min, max] to [0, 1].
  */
 export const normalize = (value: number, min: number, max: number): number =>
-  clamp((value - min) / (max - min));
+	clamp((value - min) / (max - min));

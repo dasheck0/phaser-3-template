@@ -1,7 +1,7 @@
-import Phaser from 'phaser';
-import { createGameConfig } from '@config/game-config';
+import { createGameConfig } from "@config/game-config";
+import Phaser from "phaser";
 // Import prefab registry to trigger registration
-import '@prefabs/index';
+import "@prefabs/index";
 
 /**
  * Application Entry Point
@@ -9,7 +9,7 @@ import '@prefabs/index';
  */
 
 // Initialize game when DOM is ready
-window.addEventListener('load', () => {
-  const config = createGameConfig();
-  new Phaser.Game(config);
+window.addEventListener("load", () => {
+	const config = createGameConfig();
+	new Phaser.Game(config);
 });

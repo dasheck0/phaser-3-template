@@ -1,9 +1,9 @@
-import { State } from '@systems/finite-state-machine';
+import { State } from "@systems/finite-state-machine";
 
 export class PlayingState extends State {
-  enter(): void {}
+	enter(): void {}
 
-  execute(): void {
-    // Game logic here
-  }
+	execute(): void {
+		// Game logic here
+	}
 }

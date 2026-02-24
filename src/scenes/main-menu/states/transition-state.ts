@@ -1,5 +1,5 @@
-import { State } from '@systems/finite-state-machine';
+import { State } from "@systems/finite-state-machine";
 
 export class TransitionState extends State {
-  enter(): void {}
+	enter(): void {}
 }

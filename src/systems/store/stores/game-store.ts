@@ -1,6 +1,6 @@
-import { clamp } from '@/utils/math';
-import { createStore } from '../create-store';
-import { createLocalStorageAdapter } from '../persistence/local-storage-adapter';
+import { clamp } from "@/utils/math";
+import { createStore } from "../create-store";
+import { createLocalStorageAdapter } from "../persistence/local-storage-adapter";
 
 /**
  * GameState — persisted game-wide data.
@@ -9,16 +9,14 @@ import { createLocalStorageAdapter } from '../persistence/local-storage-adapter'
  * - masterVolume: global audio volume [0..1]
  */
 export interface GameState {
-  playCount: number;
-  masterVolume: number;
+	playCount: number;
+	masterVolume: number;
 }
 
 const INITIAL_STATE: GameState = {
-  playCount: 0,
-  masterVolume: 1.0,
+	playCount: 0,
+	masterVolume: 1.0,
 };
-
-
 
 /**
  * gameStore — singleton store for global game state.
@@ -45,24 +43,24 @@ const INITIAL_STATE: GameState = {
  * ```
  */
 export const gameStore = createStore({
-  key: 'game',
-  adapter: createLocalStorageAdapter(),
-  state: INITIAL_STATE,
+	key: "game",
+	adapter: createLocalStorageAdapter(),
+	state: INITIAL_STATE,
 
-  mutations: {
-    incrementPlayCount: (state: GameState): GameState => ({
-      ...state,
-      playCount: state.playCount + 1,
-    }),
+	mutations: {
+		incrementPlayCount: (state: GameState): GameState => ({
+			...state,
+			playCount: state.playCount + 1,
+		}),
 
-    setMasterVolume: (state: GameState, volume: number): GameState => ({
-      ...state,
-      masterVolume: clamp(volume),
-    }),
+		setMasterVolume: (state: GameState, volume: number): GameState => ({
+			...state,
+			masterVolume: clamp(volume),
+		}),
 
-    resetPlayCount: (state: GameState): GameState => ({
-      ...state,
-      playCount: 0,
-    }),
-  },
+		resetPlayCount: (state: GameState): GameState => ({
+			...state,
+			playCount: 0,
+		}),
+	},
 });
