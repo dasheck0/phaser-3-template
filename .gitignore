@@ -157,3 +157,4 @@ vite.config.ts.timestamp-*
 
 dasheck0-minimonsterquest
 todo.txt
+artifacts/scene-snapshots/**/*

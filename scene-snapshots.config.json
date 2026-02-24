@@ -1,0 +1,94 @@
+{
+	"baseUrl": "http://127.0.0.1:6758",
+	"outputDir": "artifacts/scene-snapshots",
+	"clean": true,
+	"kill": true,
+	"imageType": "png",
+	"waitAfterSceneStartMs": 700,
+	"navigationTimeoutMs": 30000,
+	"sceneReadyTimeoutMs": 30000,
+	"server": {
+		"command": "npm run build && npm run preview -- --host 127.0.0.1 --port 6758 --strictPort",
+		"readyUrl": "http://127.0.0.1:6758",
+		"startupTimeoutMs": 60000
+	},
+	"viewports": [
+		{
+			"name": "iphone-se-2022",
+			"width": 375,
+			"height": 667,
+			"deviceScaleFactor": 2
+		},
+		{
+			"name": "iphone-x-xs-11-pro",
+			"width": 375,
+			"height": 812,
+			"deviceScaleFactor": 3
+		},
+		{
+			"name": "iphone-12-13-14",
+			"width": 390,
+			"height": 844,
+			"deviceScaleFactor": 3
+		},
+		{
+			"name": "iphone-14-plus-15-plus",
+			"width": 428,
+			"height": 926,
+			"deviceScaleFactor": 3
+		},
+		{
+			"name": "iphone-15-pro-max",
+			"width": 430,
+			"height": 932,
+			"deviceScaleFactor": 3
+		},
+		{
+			"name": "pixel-7-8",
+			"width": 412,
+			"height": 915,
+			"deviceScaleFactor": 2.625
+		},
+		{
+			"name": "pixel-7a",
+			"width": 412,
+			"height": 915,
+			"deviceScaleFactor": 2.625
+		},
+		{
+			"name": "galaxy-s23",
+			"width": 360,
+			"height": 780,
+			"deviceScaleFactor": 3
+		},
+		{
+			"name": "galaxy-s23-ultra",
+			"width": 412,
+			"height": 915,
+			"deviceScaleFactor": 3.5
+		},
+		{
+			"name": "galaxy-a54",
+			"width": 360,
+			"height": 800,
+			"deviceScaleFactor": 3
+		}
+	],
+	"scenes": [
+		{
+			"key": "MainMenuScene"
+		},
+		{
+			"key": "OptionsScene"
+		},
+		{
+			"key": "GameScene"
+		},
+		{
+			"key": "GameOverScene"
+		},
+		{
+			"key": "UIShowcaseScene"
+		}
+	]
+}

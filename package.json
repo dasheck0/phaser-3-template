@@ -10,7 +10,8 @@
 		"format:check": "biome format",
 		"format:write": "biome format --write",
 		"biome:fix": "biome check --fix",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"scene-snapshots": "node ./scripts/capture-scene-snapshots.mjs --config scene-snapshots.config.json"
 	},
 	"author": "Stefan Neidig <s.neidig@nanogiants.de> (https://nanogiants.de/)",
 	"license": "MIT",
@@ -19,6 +20,7 @@
 		"@commitlint/config-conventional": "^20.4.1",
 		"@types/node": "^25.2.3",
 		"lefthook": "^2.1.1",
+		"playwright": "^1.56.1",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.1"
 	},
