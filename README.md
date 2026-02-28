@@ -180,6 +180,160 @@ Subclasses never deal with this; they just implement `onCreateReady()`.
 
 > **Important:** Each scene uses its own `scenePath` as the Phaser cache key (`__sceneConfig:<path>`) so multiple scenes can preload concurrently without collisions.
 
+### Layout Anchoring Guide
+
+This project positions prefabs through `layout` in scene JSON and resolves coordinates in `src/systems/layout-resolver.ts`.
+
+#### Positioning model
+
+Each prefab can define:
+
+- `layout.space`: coordinate space (`"full"` or `"safe"`)
+- `layout.anchor`: semantic anchor expression (recommended)
+- `layout.offset`: extra numeric delta added after anchor resolution
+- `layout.x` / `layout.y`: absolute numeric offset from the selected space origin when no anchor is set
+
+Resolver formula:
+
+- `finalX = resolvedAnchorX or (space.left + layout.x) + offset.x`
+- `finalY = resolvedAnchorY or (space.top + layout.y) + offset.y`
+
+#### `layout.space`
+
+- `"full"`: whole world rectangle (`0..worldWidth`, `0..worldHeight`)
+- `"safe"`: visible world rectangle minus scene `safeMargin`
+
+Use `"safe"` for UI that should avoid cropped edges on narrow/tall viewports.
+
+#### Anchor properties you can use
+
+X-axis keys (first defined one wins):
+
+- `left`
+- `right`
+- `centerX`
+- `x` (alias for center token behavior)
+
+Y-axis keys (first defined one wins):
+
+- `top`
+- `bottom`
+- `centerY`
+- `y` (alias for center token behavior)
+
+#### Allowed anchor values
+
+Each anchor value can be:
+
+- Number: `120`
+- Token: `"left"`, `"right"`, `"center"`, `"top"`, `"bottom"`, `"centerX"`, `"centerY"`
+- Token with offset: `"left+16"`, `"right-24"`, `"center+8"`, `"bottom-40"`
+
+Notes:
+
+- Spaces around operators are allowed (`"left + 16"`)
+- Offsets support decimals (`"center+12.5"`)
+- Invalid expressions throw a runtime error early
+
+#### Priority rules (important)
+
+- If `layout.anchor` defines an axis, it overrides `layout.x`/`layout.y` for that axis.
+- If multiple keys of the same axis are set, resolver uses the first supported key in this order:
+  - X: `left -> right -> centerX -> x`
+  - Y: `top -> bottom -> centerY -> y`
+- `layout.offset` is always applied last.
+
+#### Recipes (copy/paste)
+
+Top-left in safe area with margin:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "left": "left+16", "top": "top+16" }
+}
+```
+
+Bottom-right in safe area:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "right": "right-16", "bottom": "bottom-16" }
+}
+```
+
+Perfect center:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "centerX": "center", "centerY": "center" }
+}
+```
+
+Centered horizontally, near top:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "centerX": "center", "top": "top+40" }
+}
+```
+
+Centered horizontally, near bottom:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "centerX": "center", "bottom": "bottom-40" }
+}
+```
+
+Left side, vertically centered:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "left": "left+24", "centerY": "center" }
+}
+```
+
+Right side, vertically centered:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "right": "right-24", "centerY": "center" }
+}
+```
+
+Absolute offset in selected space (no anchor):
+
+```json
+"layout": {
+  "space": "safe",
+  "x": 120,
+  "y": 280
+}
+```
+
+Anchor + final nudge via `offset`:
+
+```json
+"layout": {
+  "space": "safe",
+  "anchor": { "centerX": "center", "top": "top+100" },
+  "offset": { "x": 6, "y": -4 }
+}
+```
+
+#### Quick troubleshooting
+
+- Element appears off-screen: switch to `"safe"` and use anchor tokens, not hardcoded `x/y`.
+- Element shifts on device resize: prefer anchor expressions over absolute coordinates.
+- Position not matching expectation: check axis key priority and whether `offset` is applied.
+
 ### Finite State Machine
 
 Every scene owns a `FiniteStateMachine` instance. States are plain classes in dedicated files:
