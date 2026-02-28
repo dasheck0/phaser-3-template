@@ -8,6 +8,42 @@
 			"left": 16
 		}
 	},
+	"assets": {
+		"images": [
+			{
+				"key": "deFlag",
+				"path": "/assets/images/languages/de.png"
+			},
+			{
+				"key": "enFlag",
+				"path": "/assets/images/languages/en.png"
+			},
+			{
+				"key": "esFlag",
+				"path": "/assets/images/languages/es.png"
+			},
+			{
+				"key": "frFlag",
+				"path": "/assets/images/languages/fr.png"
+			},
+			{
+				"key": "itFlag",
+				"path": "/assets/images/languages/it.png"
+			},
+			{
+				"key": "nlFlag",
+				"path": "/assets/images/languages/nl.png"
+			},
+			{
+				"key": "plFlag",
+				"path": "/assets/images/languages/pl.png"
+			},
+			{
+				"key": "ptFlag",
+				"path": "/assets/images/languages/pt.png"
+			}
+		]
+	},
 	"prefabs": [
 		{
 			"type": "Label",
@@ -17,7 +53,7 @@
 				"anchor": { "centerX": "center", "top": "top+130" }
 			},
 			"properties": {
-				"text": "OPTIONS",
+				"text": "options.title",
 				"style": {
 					"fontSize": "36px",
 					"color": "#ffffff",
@@ -35,7 +71,7 @@
 				"anchor": { "left": "left+60", "top": "top+255" }
 			},
 			"properties": {
-				"text": "Master Volume",
+				"text": "options.masterVolume",
 				"style": { "fontSize": "20px", "color": "#cccccc" },
 				"space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
 			}
@@ -59,13 +95,59 @@
 		},
 		{
 			"type": "Label",
+			"id": "languageLabel",
+			"layout": {
+				"space": "safe",
+				"anchor": { "left": "left+60", "top": "top+320" }
+			},
+			"properties": {
+				"text": "options.language",
+				"style": { "fontSize": "20px", "color": "#cccccc" },
+				"space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+			}
+		},
+		{
+			"type": "LanguageChooser",
+			"id": "languageChooser",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "centerY": "center" }
+			},
+			"properties": {
+				"activeLocale": "en",
+				"options": [
+					{ "locale": "de", "key": "deFlag" },
+					{ "locale": "en", "key": "enFlag" },
+					{ "locale": "es", "key": "esFlag" },
+					{ "locale": "fr", "key": "frFlag" },
+					{ "locale": "it", "key": "itFlag" },
+					{ "locale": "nl", "key": "nlFlag" },
+					{ "locale": "pl", "key": "plFlag" },
+					{ "locale": "pt", "key": "ptFlag" }
+				],
+				"columns": 4,
+				"gridWidth": 240,
+				"cellPadding": 8,
+				"iconPadding": 6,
+				"indicatorShape": "circle",
+				"activeBorderColor": 6737151,
+				"activeBorderWidth": 3,
+				"inactiveBorderColor": 6052956,
+				"inactiveBorderWidth": 0,
+				"backgroundColor": 1841439,
+				"backgroundAlpha": 0,
+				"depth": 100
+			}
+		},
+		{
+			"type": "Label",
 			"id": "statsLabel",
 			"layout": {
 				"space": "safe",
-				"anchor": { "centerX": "center", "top": "top+380" }
+				"anchor": { "centerX": "center", "top": "top+410" }
 			},
 			"properties": {
-				"text": "Total sessions played: 0",
+				"text": "options.stats",
 				"style": { "fontSize": "16px", "color": "#777777" },
 				"space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
 			}
@@ -75,10 +157,10 @@
 			"id": "backButton",
 			"layout": {
 				"space": "safe",
-				"anchor": { "centerX": "center", "top": "top+445" }
+				"anchor": { "centerX": "center", "top": "top+475" }
 			},
 			"properties": {
-				"text": "Back",
+				"text": "options.backButton",
 				"style": { "fontSize": "20px", "color": "#ffffff" },
 				"background": {
 					"radius": 6,
@@ -96,10 +178,10 @@
 			"id": "keyboardHint",
 			"layout": {
 				"space": "safe",
-				"anchor": { "centerX": "center", "top": "top+555" }
+				"anchor": { "centerX": "center", "top": "top+585" }
 			},
 			"properties": {
-				"text": "ESC - back to menu",
+				"text": "options.keyboardHint",
 				"style": { "fontSize": "14px", "color": "#555555" },
 				"space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
 			}

@@ -1,9 +1,10 @@
+import { t } from "@systems/i18n";
 import { BaseObject } from "../base-object";
 
 export interface LabelOptions {
 	x?: number;
 	y?: number;
-	text?: string;
+	text: string;
 	style?: Phaser.Types.GameObjects.Text.TextStyle;
 	background?: {
 		radius?: number;
@@ -43,7 +44,7 @@ export class Label extends BaseObject {
 		const textObj = this.scene.add.text(
 			0,
 			0,
-			opts.text ?? "",
+			t(opts.text ?? ""),
 			opts.style ?? {},
 		);
 

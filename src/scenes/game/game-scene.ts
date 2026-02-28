@@ -1,3 +1,4 @@
+import { t } from "@systems/i18n";
 import { gameStore } from "@systems/store/stores/game-store";
 import type { SceneConfig } from "@systems/types";
 import type { Enemy } from "@/prefabs/game/enemy";
@@ -109,15 +110,23 @@ export class GameScene extends BaseScene {
 	private setupUI(): void {
 		const { playCount, masterVolume } = gameStore.getState();
 
-		this.scoreText = this.add.text(16, 16, `Score: ${this.score}`, {
-			fontSize: "24px",
-			color: "#000",
-		});
+		this.scoreText = this.add.text(
+			16,
+			16,
+			t("game.score", { score: this.score }),
+			{
+				fontSize: "24px",
+				color: "#000",
+			},
+		);
 
 		this.add.text(
 			16,
 			48,
-			`Session #${playCount}  |  Volume: ${masterVolume.toFixed(2)}`,
+			t("game.sessionStats", {
+				playCount,
+				masterVolume: masterVolume.toFixed(2),
+			}),
 			{
 				fontSize: "16px",
 				color: "#333333",
@@ -158,7 +167,7 @@ export class GameScene extends BaseScene {
 			this.platforms.length &&
 			this.scoreText
 		) {
-			this.scoreText.setText(`Score: ${this.score}`);
+			this.scoreText.setText(t("game.score", { score: this.score }));
 		}
 	}
 }

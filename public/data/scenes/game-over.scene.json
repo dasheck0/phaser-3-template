@@ -17,7 +17,7 @@
 				"anchor": { "centerX": "center", "top": "top+180" }
 			},
 			"properties": {
-				"text": "Game Over",
+				"text": "gameOver.title",
 				"style": {
 					"fontSize": "64px",
 					"color": "#ff0000",
@@ -35,7 +35,7 @@
 				"anchor": { "centerX": "center", "top": "top+340" }
 			},
 			"properties": {
-				"text": "Restart",
+				"text": "gameOver.restartButton",
 				"style": { "fontSize": "24px", "color": "#ffffff" },
 				"background": {
 					"radius": 6,
@@ -56,7 +56,7 @@
 				"anchor": { "centerX": "center", "top": "top+420" }
 			},
 			"properties": {
-				"text": "Main Menu",
+				"text": "gameOver.menuButton",
 				"style": { "fontSize": "24px", "color": "#ffffff" },
 				"background": {
 					"radius": 6,

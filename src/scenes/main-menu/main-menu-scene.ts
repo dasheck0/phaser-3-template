@@ -1,4 +1,5 @@
 import { Label } from "@prefabs/ui/label";
+import { t } from "@systems/i18n";
 import { gameStore } from "@systems/store/stores/game-store";
 import { BaseScene } from "../base-scene";
 import { IdleState } from "./states/idle-state";
@@ -62,7 +63,10 @@ export class MainMenuScene extends BaseScene {
 			);
 		}
 		prefab.setText(
-			`Sessions played: ${playCount}  |  Volume: ${masterVolume.toFixed(2)}`,
+			t("mainMenu.stats", {
+				playCount,
+				masterVolume: masterVolume.toFixed(2),
+			}),
 		);
 	}
 

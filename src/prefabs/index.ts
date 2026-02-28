@@ -14,6 +14,7 @@ import { IconProgressBar } from "./ui/icon-progress-bar";
 import { ImageButton } from "./ui/image-button";
 import { ImageToggleButton } from "./ui/image-toggle-button";
 import { Label } from "./ui/label";
+import { LanguageChooser } from "./ui/language-chooser";
 import { PagedParallaxBackground } from "./ui/paged-parallax-background";
 import { Slider } from "./ui/slider";
 import { StaticImage } from "./ui/static-image";
@@ -30,6 +31,7 @@ PrefabManager.register("IconProgressBar", IconProgressBar);
 PrefabManager.register("ImageButton", ImageButton);
 PrefabManager.register("ImageToggleButton", ImageToggleButton);
 PrefabManager.register("Label", Label);
+PrefabManager.register("LanguageChooser", LanguageChooser);
 PrefabManager.register("PagedParallaxBackground", PagedParallaxBackground);
 PrefabManager.register("Slider", Slider);
 PrefabManager.register("StaticImage", StaticImage);
@@ -60,6 +62,11 @@ export type { ImageToggleButtonOptions } from "./ui/image-toggle-button";
 export { ImageToggleButton } from "./ui/image-toggle-button";
 export type { LabelOptions } from "./ui/label";
 export { Label } from "./ui/label";
+export type {
+	LanguageChoice,
+	LanguageChooserOptions,
+} from "./ui/language-chooser";
+export { LanguageChooser } from "./ui/language-chooser";
 export type { NinepatchButtonOptions } from "./ui/ninepatch-button";
 export { NinepatchButton } from "./ui/ninepatch-button";
 export type { NinepatchIconButtonOptions } from "./ui/ninepatch-icon-button";

@@ -1,6 +1,9 @@
 import { Label } from "@prefabs/ui/label";
+import { LanguageChooser } from "@prefabs/ui/language-chooser";
 import { Slider } from "@prefabs/ui/slider";
+import { setLocale, t } from "@systems/i18n";
 import { gameStore } from "@systems/store/stores/game-store";
+import { userStore } from "@systems/store/stores/user-store";
 import { BaseScene } from "../base-scene";
 import { IdleState } from "./states/idle-state";
 
@@ -32,6 +35,7 @@ export class OptionsScene extends BaseScene {
 		const { masterVolume, playCount } = gameStore.getState();
 		this.updateStatsLabel(playCount);
 		this.wireSlider(masterVolume);
+		this.wireLanguageChooser();
 		this.wireButton("backButton", () => this.goBack());
 
 		this.unsubscribe = gameStore.subscribe((state) => {
@@ -41,6 +45,22 @@ export class OptionsScene extends BaseScene {
 		this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribe?.());
 		this.input.keyboard?.removeAllListeners("keydown-ESC");
 		this.input.keyboard?.once("keydown-ESC", () => this.goBack());
+	}
+
+	private wireLanguageChooser(): void {
+		const prefab = this.sceneLoader.getPrefabById("languageChooser");
+		if (!(prefab instanceof LanguageChooser)) {
+			throw new Error(
+				'[OptionsScene] wireLanguageChooser: "languageChooser" is not a LanguageChooser',
+			);
+		}
+
+		prefab.setActiveLocale(userStore.getState().locale);
+		prefab.setOnChange(async (locale: string) => {
+			userStore.actions.setLocale(locale);
+			await setLocale(locale);
+			this.scene.restart();
+		});
 	}
 
 	protected setupStates(): void {
@@ -85,7 +105,7 @@ export class OptionsScene extends BaseScene {
 				'[OptionsScene] updateStatsLabel: "statsLabel" is not a Label',
 			);
 		}
-		prefab.setText(`Total sessions played: ${playCount}`);
+		prefab.setText(t("options.stats", { playCount }));
 	}
 
 	private goBack(): void {

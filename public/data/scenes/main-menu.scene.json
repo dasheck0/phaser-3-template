@@ -1,167 +1,167 @@
 {
-  "background": "#2d2d2d",
-  "layout": {
-    "safeMargin": {
-      "top": 16,
-      "right": 16,
-      "bottom": 16,
-      "left": 16
-    }
-  },
-  "assets": {
-    "images": [
-      {
-        "key": "notesLogo",
-        "path": "/assets/images/notes.png"
-      },
-      {
-        "key": "uiClickIndicator",
-        "path": "/assets/images/ui-click-indicator.png"
-      },
-      {
-        "key": "uiBackground",
-        "path": "/assets/images/ui-menu-background-wide.png"
-      }
-    ],
-    "audio": [
-      {
-        "key": "test",
-        "path": "/assets/audio/test.mp3"
-      }
-    ]
-  },
-  "prefabs": [
-    {
-      "type": "StaticImage",
-      "id": "menuLogo",
-      "layout": {
-        "space": "safe",
-        "anchor": { "left": "left+16", "top": "top+16" }
-      },
-      "properties": {
-        "textureKey": "notesLogo",
-        "width": 128,
-        "height": 128,
-        "originX": 0,
-        "originY": 0
-      }
-    },
-    {
-      "type": "StaticImage",
-      "id": "menuBackground",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "centerY": "center" }
-      },
-      "properties": {
-        "textureKey": "uiBackground",
-        "originX": 0.5,
-        "originY": 0.5
-      }
-    },
-    {
-      "type": "ClickIndicator",
-      "id": "clickIndicator",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "centerY": "center" }
-      },
-      "properties": {
-        "key": "uiClickIndicator",
-        "depth": 2000,
-        "animationDuration": 300
-      }
-    },
-    {
-      "type": "Label",
-      "id": "titleLabel",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+50" }
-      },
-      "properties": {
-        "text": "Phaser 3 Starter",
-        "style": { "fontSize": "48px", "color": "#00ffff" },
-        "background": { "radius": 4, "color": 0 },
-        "space": { "left": 10, "right": 10, "top": 8, "bottom": 8 },
-        "align": "center"
-      }
-    },
-    {
-      "type": "Label",
-      "id": "statsLabel",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+210" }
-      },
-      "properties": {
-        "text": "Sessions played: 0  |  Volume: 1.00",
-        "style": { "fontSize": "18px", "color": "#aaaaaa" },
-        "space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
-      }
-    },
-    {
-      "type": "Label",
-      "id": "startButton",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+300" }
-      },
-      "properties": {
-        "text": "Start Game",
-        "style": { "fontSize": "24px", "color": "#ffffff" },
-        "background": {
-          "radius": 6,
-          "color": 4886754,
-          "strokeColor": 3504829,
-          "strokeWidth": 2
-        },
-        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
-        "align": "center",
-        "setInteractive": true
-      }
-    },
-    {
-      "type": "Label",
-      "id": "optionsButton",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+375" }
-      },
-      "properties": {
-        "text": "Options",
-        "style": { "fontSize": "24px", "color": "#ffffff" },
-        "background": {
-          "radius": 6,
-          "color": 6710886,
-          "strokeColor": 5592405,
-          "strokeWidth": 2
-        },
-        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
-        "align": "center",
-        "setInteractive": true
-      }
-    },
-    {
-      "type": "Label",
-      "id": "showcaseButton",
-      "layout": {
-        "space": "safe",
-        "anchor": { "centerX": "center", "top": "top+450" }
-      },
-      "properties": {
-        "text": "UI Showcase",
-        "style": { "fontSize": "24px", "color": "#ffffff" },
-        "background": {
-          "radius": 6,
-          "color": 3342336,
-          "strokeColor": 2228224,
-          "strokeWidth": 2
-        },
-        "space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
-        "align": "center",
-        "setInteractive": true
-      }
-    }
-  ]
+	"background": "#2d2d2d",
+	"layout": {
+		"safeMargin": {
+			"top": 16,
+			"right": 16,
+			"bottom": 16,
+			"left": 16
+		}
+	},
+	"assets": {
+		"images": [
+			{
+				"key": "notesLogo",
+				"path": "/assets/images/notes.png"
+			},
+			{
+				"key": "uiClickIndicator",
+				"path": "/assets/images/ui-click-indicator.png"
+			},
+			{
+				"key": "uiBackground",
+				"path": "/assets/images/ui-menu-background-wide.png"
+			}
+		],
+		"audio": [
+			{
+				"key": "test",
+				"path": "/assets/audio/test.mp3"
+			}
+		]
+	},
+	"prefabs": [
+		{
+			"type": "StaticImage",
+			"id": "menuLogo",
+			"layout": {
+				"space": "safe",
+				"anchor": { "left": "left+16", "top": "top+16" }
+			},
+			"properties": {
+				"textureKey": "notesLogo",
+				"width": 128,
+				"height": 128,
+				"originX": 0,
+				"originY": 0
+			}
+		},
+		{
+			"type": "StaticImage",
+			"id": "menuBackground",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "centerY": "center" }
+			},
+			"properties": {
+				"textureKey": "uiBackground",
+				"originX": 0.5,
+				"originY": 0.5
+			}
+		},
+		{
+			"type": "ClickIndicator",
+			"id": "clickIndicator",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "centerY": "center" }
+			},
+			"properties": {
+				"key": "uiClickIndicator",
+				"depth": 2000,
+				"animationDuration": 300
+			}
+		},
+		{
+			"type": "Label",
+			"id": "titleLabel",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+50" }
+			},
+			"properties": {
+				"text": "mainMenu.title",
+				"style": { "fontSize": "48px", "color": "#00ffff" },
+				"background": { "radius": 4, "color": 0 },
+				"space": { "left": 10, "right": 10, "top": 8, "bottom": 8 },
+				"align": "center"
+			}
+		},
+		{
+			"type": "Label",
+			"id": "statsLabel",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+210" }
+			},
+			"properties": {
+				"text": "mainMenu.stats",
+				"style": { "fontSize": "18px", "color": "#aaaaaa" },
+				"space": { "left": 0, "right": 0, "top": 0, "bottom": 0 }
+			}
+		},
+		{
+			"type": "Label",
+			"id": "startButton",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+300" }
+			},
+			"properties": {
+				"text": "mainMenu.startButton",
+				"style": { "fontSize": "24px", "color": "#ffffff" },
+				"background": {
+					"radius": 6,
+					"color": 4886754,
+					"strokeColor": 3504829,
+					"strokeWidth": 2
+				},
+				"space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+				"align": "center",
+				"setInteractive": true
+			}
+		},
+		{
+			"type": "Label",
+			"id": "optionsButton",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+375" }
+			},
+			"properties": {
+				"text": "mainMenu.optionsButton",
+				"style": { "fontSize": "24px", "color": "#ffffff" },
+				"background": {
+					"radius": 6,
+					"color": 6710886,
+					"strokeColor": 5592405,
+					"strokeWidth": 2
+				},
+				"space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+				"align": "center",
+				"setInteractive": true
+			}
+		},
+		{
+			"type": "Label",
+			"id": "showcaseButton",
+			"layout": {
+				"space": "safe",
+				"anchor": { "centerX": "center", "top": "top+450" }
+			},
+			"properties": {
+				"text": "mainMenu.showcaseButton",
+				"style": { "fontSize": "24px", "color": "#ffffff" },
+				"background": {
+					"radius": 6,
+					"color": 3342336,
+					"strokeColor": 2228224,
+					"strokeWidth": 2
+				},
+				"space": { "left": 40, "right": 40, "top": 16, "bottom": 16 },
+				"align": "center",
+				"setInteractive": true
+			}
+		}
+	]
 }
