@@ -1,4 +1,6 @@
 import { createStore as createZustandStore } from "zustand/vanilla";
+import { STORE_NAMESPACE } from "../../config/constants";
+import { snakeConcat } from "../../utils/string";
 import type {
 	Actions,
 	MutationMap,
@@ -36,9 +38,11 @@ export const createStore = <
 	// Internal Zustand vanilla store — holds the single source of truth
 	const zustandStore = createZustandStore<TState>(() => ({ ...initialState }));
 
+	const actualKey = snakeConcat(STORE_NAMESPACE, key);
+
 	// Auto-persist on every state change
 	zustandStore.subscribe((state) => {
-		adapter.save(key, state);
+		adapter.save(actualKey, state);
 	});
 
 	// Build typed action dispatchers from the mutations map
@@ -56,7 +60,7 @@ export const createStore = <
 
 	// Hydrate: merge persisted state on top of initial state
 	const hydrate = async (): Promise<void> => {
-		const persisted = await adapter.load<TState>(key);
+		const persisted = await adapter.load<TState>(actualKey);
 		if (persisted) {
 			zustandStore.setState({ ...initialState, ...persisted });
 		}
@@ -65,7 +69,7 @@ export const createStore = <
 	// Reset: restore initial state and wipe the persisted snapshot
 	const reset = async (): Promise<void> => {
 		zustandStore.setState({ ...initialState });
-		await adapter.clear(key);
+		await adapter.clear(actualKey);
 	};
 
 	// Kick off initial hydration immediately (fire-and-forget)

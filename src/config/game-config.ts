@@ -9,7 +9,7 @@ import RexUIPlugin from "phaser3-rex-plugins/templates/ui/ui-plugin.js";
 
 // Game configuration following modular principles
 export const createGameConfig = (): Phaser.Types.Core.GameConfig => ({
-	type: Phaser.AUTO,
+	type: Phaser.WEBGL,
 	width: 614,
 	height: 1366, //2400
 	parent: "game-container",
@@ -42,4 +42,10 @@ export const createGameConfig = (): Phaser.Types.Core.GameConfig => ({
 		mode: Phaser.Scale.ENVELOP,
 		autoCenter: Phaser.Scale.CENTER_BOTH,
 	},
+	render: {
+		transparent: true,
+		roundPixels: false,
+		antialias: true,
+		pixelArt: false
+	}
 });
